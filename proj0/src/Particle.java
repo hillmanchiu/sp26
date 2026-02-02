@@ -17,7 +17,25 @@ public class Particle {
 
     public Particle(ParticleFlavor flavor) {
         this.flavor = flavor;
+        if (flavor == ParticleFlavor.PLANT) {
+            lifespan = PLANT_LIFESPAN;
+        }
+        if (flavor == ParticleFlavor.FLOWER) {
+            lifespan = FLOWER_LIFESPAN;
+        }
+        if (flavor == ParticleFlavor.FIRE) {
+            lifespan = FIRE_LIFESPAN;
+        }
         lifespan = -1;
+    }
+
+    public void decrementLifespan() {
+        if (this.lifespan > 0) {
+            lifespan --;
+        }
+        else if (this.lifespan == 0) {
+            lifespan = -1;
+        }
     }
 
     public Color color() {
@@ -77,6 +95,25 @@ public class Particle {
     }
 
     public void grow(Map<Direction, Particle> neighbors) {
+        int a = StdRandom.uniformInt(10);
+        if (a == 0) {
+            if (neighbors.get(Direction.UP).flavor == ParticleFlavor.EMPTY) {
+                (neighbors.get(Direction.UP)).flavor = this.flavor;
+                (neighbors.get(Direction.UP)).lifespan = this.lifespan;
+            }
+        }
+        if (a == 1) {
+            if (neighbors.get(Direction.LEFT).flavor == ParticleFlavor.EMPTY) {
+                (neighbors.get(Direction.LEFT)).flavor = this.flavor;
+                (neighbors.get(Direction.LEFT)).lifespan = this.lifespan;
+            }
+        }
+        if (a == 2) {
+            if (neighbors.get(Direction.RIGHT).flavor == ParticleFlavor.EMPTY) {
+                (neighbors.get(Direction.RIGHT)).flavor = this.flavor;
+                (neighbors.get(Direction.RIGHT)).lifespan = this.lifespan;
+            }
+        }
     }
 
     public void burn(Map<Direction, Particle> neighbors) {
@@ -91,6 +128,9 @@ public class Particle {
         }
         if (this.flavor == ParticleFlavor.WATER) {
             this.flow(neighbors);
+        }
+        if (this.flavor == ParticleFlavor.PLANT || this.flavor == ParticleFlavor.FLOWER) {
+            this.grow(neighbors);
         }
     }
 }
