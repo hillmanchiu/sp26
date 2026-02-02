@@ -18,23 +18,27 @@ public class Particle {
     public Particle(ParticleFlavor flavor) {
         this.flavor = flavor;
         if (flavor == ParticleFlavor.PLANT) {
-            lifespan = PLANT_LIFESPAN;
+            this.lifespan = 150;
         }
         if (flavor == ParticleFlavor.FLOWER) {
-            lifespan = FLOWER_LIFESPAN;
+            this.lifespan = 75;
         }
         if (flavor == ParticleFlavor.FIRE) {
-            lifespan = FIRE_LIFESPAN;
+            this.lifespan = 10;
         }
-        lifespan = -1;
+        else {
+            this.lifespan = -1;
+        }
+
     }
 
     public void decrementLifespan() {
         if (this.lifespan > 0) {
-            lifespan --;
+            this.lifespan --;
         }
-        else if (this.lifespan == 0) {
-            lifespan = -1;
+        if (this.lifespan == 0) {
+            this.flavor = ParticleFlavor.EMPTY;
+            this.lifespan = -1;
         }
     }
 
@@ -56,8 +60,22 @@ public class Particle {
             int r = (int) Math.round(255 * ratio);
             return new Color(r, 0, 0);
         }
-
-        return Color.GRAY;
+        if (this.flavor == ParticleFlavor.EMPTY) {
+            return Color.BLACK;
+        }
+        if (this.flavor == ParticleFlavor.SAND) {
+            return Color.YELLOW;
+        }
+        if (this.flavor == ParticleFlavor.BARRIER) {
+            return Color.GRAY;
+        }
+        if (this.flavor == ParticleFlavor.WATER) {
+            return Color.BLUE;
+        }
+        if (this.flavor == ParticleFlavor.FOUNTAIN) {
+            return Color.CYAN;
+        }
+    return Color.GRAY;
     }
 
     public void moveInto(Particle other) {
