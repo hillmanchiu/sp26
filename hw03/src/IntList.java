@@ -42,6 +42,7 @@ public class IntList {
     public static IntList incrRecursiveDestructive(IntList L, int x) {
         // TODO: Fill in this code
         if (L.rest == null) {
+            L.first = L.first + x;
             return L;
         }
         L.first = L.first + x;

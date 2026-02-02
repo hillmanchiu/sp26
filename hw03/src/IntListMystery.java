@@ -35,7 +35,10 @@ public class IntListMystery {
         return 491;
     }
 
-    public static void main(String[] args) {
-        mystery();
+    public static void main(String[] args) {mystery();
+        IntList L = new IntList(5, null);
+        L.rest = new IntList(7, null);
+        L.rest.rest = new IntList(9, null);
+        IntList.incrRecursiveDestructive(L, 3);
     }
 }
