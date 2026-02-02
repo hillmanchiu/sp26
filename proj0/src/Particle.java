@@ -43,22 +43,14 @@ public class Particle {
     }
 
     public Color color() {
-        if (flavor == ParticleFlavor.FLOWER) {
-            double ratio = (double) Math.max(0, Math.min(lifespan, FLOWER_LIFESPAN)) / FLOWER_LIFESPAN;
-            int r = 120 + (int) Math.round((255 - 120) * ratio);
-            int g = 70 + (int) Math.round((141 - 70) * ratio);
-            int b = 80 + (int) Math.round((161 - 80) * ratio);
-            return new Color(r, g, b);
+        if(this.flavor == ParticleFlavor.PLANT){
+            return new Color(0, 255, 0);
         }
-        if (flavor == ParticleFlavor.PLANT) {
-            double ratio = (double) Math.max(0, Math.min(lifespan, PLANT_LIFESPAN)) / PLANT_LIFESPAN;
-            int g = 120 + (int) Math.round((255 - 120) * ratio);
-            return new Color(0, g, 0);
+        if (this.flavor == ParticleFlavor.FLOWER) {
+            return new Color(255, 141, 161);
         }
-        if (flavor == ParticleFlavor.FIRE) {
-            double ratio = (double) Math.max(0, Math.min(lifespan, FIRE_LIFESPAN)) / FIRE_LIFESPAN;
-            int r = (int) Math.round(255 * ratio);
-            return new Color(r, 0, 0);
+        if (this.flavor == ParticleFlavor.FIRE) {
+            return new Color(255, 0, 0);
         }
         if (this.flavor == ParticleFlavor.EMPTY) {
             return Color.BLACK;
@@ -117,13 +109,13 @@ public class Particle {
                 (neighbors.get(Direction.UP)).lifespan = (LIFESPANS.get(this.flavor));
             }
         }
-        if (a == 1) {
+        if (a == 0) {
             if (neighbors.get(Direction.LEFT).flavor == ParticleFlavor.EMPTY) {
                 (neighbors.get(Direction.LEFT)).flavor = this.flavor;
                 (neighbors.get(Direction.LEFT)).lifespan = (LIFESPANS.get(this.flavor));
             }
         }
-        if (a == 2) {
+        if (a == 0) {
             if (neighbors.get(Direction.RIGHT).flavor == ParticleFlavor.EMPTY) {
                 (neighbors.get(Direction.RIGHT)).flavor = this.flavor;
                 (neighbors.get(Direction.RIGHT)).lifespan = (LIFESPANS.get(this.flavor));
