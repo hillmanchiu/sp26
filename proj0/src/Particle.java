@@ -24,13 +24,40 @@ public class Particle {
         if (flavor == ParticleFlavor.EMPTY) {
             return Color.BLACK;
         }
+        if (flavor == ParticleFlavor.SAND) {
+            return Color.YELLOW;
+        }
+        if (flavor == ParticleFlavor.BARRIER) {
+            return Color.GRAY;
+        }
+        if (flavor == ParticleFlavor.WATER) {
+            return Color.BLUE;
+        }
+        if (flavor == ParticleFlavor.FOUNTAIN) {
+            return Color.CYAN;
+        }
+        if (flavor == ParticleFlavor.PLANT) {
+            return new Color(0, 255, 0);
+        }
+        if (flavor == ParticleFlavor.FIRE) {
+            return new Color(255, 0, 0);
+        }
+        if (flavor == ParticleFlavor.FLOWER){
+            return new Color(255, 141, 161);
+        }
+
         return Color.GRAY;
     }
 
     public void moveInto(Particle other) {
+        other.flavor = this.flavor;
+        other.lifespan = this.lifespan;
+        this.flavor = ParticleFlavor.EMPTY;
+        this.lifespan = -1;
     }
 
     public void fall(Map<Direction, Particle> neighbors) {
+
     }
 
     public void flow(Map<Direction, Particle> neighbors) {
