@@ -32,7 +32,7 @@ public class IntListMystery {
      */
     public static int middleNumber() {
         // TODO: Replace the 0 with the number you found during debugging.
-        return 627;
+        return 491;
     }
 
     public static void main(String[] args) {
