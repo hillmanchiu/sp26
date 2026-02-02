@@ -101,7 +101,7 @@ public class ParticleSimulator {
         return sb.toString();
     }
 
-    static main() {
+    public static void main(String[] args) {
         ParticleSimulator particleSimulator = new ParticleSimulator(150, 150);
         StdDraw.setXscale(0, particleSimulator.width);
         StdDraw.setYscale(0, particleSimulator.height);
