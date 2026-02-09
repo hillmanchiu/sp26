@@ -185,6 +185,9 @@ public class LinkedListDeque61B<T> implements Deque61B<T> {
     }
 
     private T RecursiveIndexer(Node p, int index) {
+        if (index > this.size-1 || index < 0) {
+            return null;
+        }
         if (index == 0) {
             return p.item;
         }

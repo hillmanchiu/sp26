@@ -125,15 +125,15 @@ public class LinkedListDeque61BTest {
     @Test
     public void getRecursiveTest () {
         Deque61B<String> brisket = new LinkedListDeque61B<>();
-        assertThat(brisket.get(1)).isEqualTo(null);
+        assertThat(brisket.getRecursive(1)).isEqualTo(null);
         brisket.addLast("little boy");
         brisket.addLast("thin man");
         brisket.addLast("Fat man");
-        assertThat(brisket.get(0)).isEqualTo("little boy");
-        assertThat(brisket.get(1)).isEqualTo("thin man");
-        assertThat(brisket.get(2)).isEqualTo("Fat man");
-        assertThat(brisket.get(50)).isEqualTo(null);
-        assertThat(brisket.get(-1)).isEqualTo(null);
+        assertThat(brisket.getRecursive(0)).isEqualTo("little boy");
+        assertThat(brisket.getRecursive(1)).isEqualTo("thin man");
+        assertThat(brisket.getRecursive(2)).isEqualTo("Fat man");
+        assertThat(brisket.getRecursive(50)).isEqualTo(null);
+        assertThat(brisket.getRecursive(-1)).isEqualTo(null);
     }
 
     @Test
