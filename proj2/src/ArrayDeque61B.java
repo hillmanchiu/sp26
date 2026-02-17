@@ -1,7 +1,5 @@
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -333,7 +331,7 @@ public class ArrayDeque61B<T> implements Deque61B<T> {
         @Override
         public T next() {
             if (position == size) {
-                throw new NoSuchElementException();
+                return null;
             }
             T returnItem = items[arrayIndex];
             position += 1;
