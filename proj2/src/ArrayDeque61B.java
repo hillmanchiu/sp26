@@ -381,18 +381,15 @@ public class ArrayDeque61B<T> implements Deque61B<T> {
     public boolean equals(Object other) {
         if (this == other) { return true; }
 
-        if (other instanceof ArrayDeque61B<?> otherArray) {
+        if (other instanceof Deque61B<?> otherArray) {
             if(this.size() != otherArray.size()) {
                 return false;
             }
-            int position = 0;
-            for (T x: this) {
-                if(otherArray.get(position) != x) {
+            for (int i = 0; i<this.size(); i++) {
+                if(otherArray.get(i) != this.get(i)) {
                     return false;
                 }
-                position += 1;
             }
-
             return true;
         }
         return false;
