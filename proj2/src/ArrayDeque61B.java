@@ -385,10 +385,12 @@ public class ArrayDeque61B<T> implements Deque61B<T> {
             if(this.size() != otherArray.size()) {
                 return false;
             }
+            int position = 0;
             for (T x: this) {
-                if(!this.contains(x)) {
+                if(otherArray.get(position) != x) {
                     return false;
                 }
+                position += 1;
             }
 
             return true;

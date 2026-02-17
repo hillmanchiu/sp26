@@ -328,7 +328,7 @@ public class ArrayDeque61BTest {
         ad3.addLast("back");
         ad3.addLast("middle");
         ad3.addLast("front");
-        assertThat(ad).isEqualTo(ad3);
+        assertThat(ad3.equals(ad2)).isFalse();
     }
 
     @Test
