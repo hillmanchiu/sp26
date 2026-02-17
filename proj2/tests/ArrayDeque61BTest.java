@@ -38,6 +38,17 @@ public class ArrayDeque61BTest {
         Dog.addFirst("nine");
         assertThat(Dog.size()).isEqualTo(9);
         assertThat(Dog.toList()).containsExactly("nine", "eight", "seven", "six", "five", "four", "three", "two", "one").inOrder();
+
+        for(int i = 0; i<10; i++) {
+            Dog.removeLast();
+        }
+        assertThat(Dog.size()).isEqualTo(0);
+        assertThat(Dog.toList()).containsExactly().inOrder();
+
+        Dog.addFirst("cheeseburger");
+        assertThat(Dog.size()).isEqualTo(1);
+        assertThat(Dog.toList()).containsExactly("cheeseburger").inOrder();
+
     }
 
     @Test
@@ -72,6 +83,16 @@ public class ArrayDeque61BTest {
         Dog.addLast(9);
         assertThat(Dog.size()).isEqualTo(9);
         assertThat(Dog.toList()).containsExactly(1, 2, 3, 4, 5, 6, 7, 8, 9).inOrder();
+
+        for(int i = 0; i<10; i++) {
+            Dog.removeLast();
+        }
+        assertThat(Dog.size()).isEqualTo(0);
+        assertThat(Dog.toList()).containsExactly().inOrder();
+
+        Dog.addLast(5);
+        assertThat(Dog.size()).isEqualTo(1);
+        assertThat(Dog.toList()).containsExactly(5).inOrder();
 
     }
 
@@ -193,11 +214,11 @@ public class ArrayDeque61BTest {
             Dog.addLast(i);
         }
 
-        for(int j = 0; j<24; j++) {
+        for(int j = 0; j<25; j++) {
             Dog.removeFirst();
         }
-        assertThat(Dog.toList()).containsExactly(24, 25, 26, 27, 28, 29, 30, 31);
-        assertThat(Dog.size()).isEqualTo(8);
+        assertThat(Dog.toList()).containsExactly( 25, 26, 27, 28, 29, 30, 31);
+        assertThat(Dog.size()).isEqualTo(7);
     }
 
     @Test
