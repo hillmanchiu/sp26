@@ -323,23 +323,18 @@ public class ArrayDeque61BTest {
         ad2.addLast("back");
 
         assertThat(ad.equals(ad2)).isTrue();
+        assertThat(ad).isEqualTo(ad2);
+        boolean hotDog = ad.equals(ad2);
+        assertThat(hotDog).isEqualTo(true);
 
         Deque61B<String> ad3 = new ArrayDeque61B<>();
         ad3.addLast("back");
         ad3.addLast("middle");
         ad3.addLast("front");
         assertThat(ad3).isNotEqualTo(ad2);
-    }
-
-    @Test
-    public void testContains() {
-        Deque61B<String> ad = new ArrayDeque61B<>();
-        assertThat(((ArrayDeque61B<String>) ad).contains("front")).isFalse();
-
-        ad.addLast("front");
-        ad.addLast("middle");
-        ad.addLast("back");
-        assertThat(((ArrayDeque61B<String>) ad).contains("front")).isTrue();
+        assertThat(ad3.equals(ad2)).isFalse();
+        boolean trueOrNot = ad3.equals(ad2);
+        assertThat(trueOrNot).isEqualTo(false);
     }
 
     @Test

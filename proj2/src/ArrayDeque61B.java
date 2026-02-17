@@ -368,15 +368,6 @@ public class ArrayDeque61B<T> implements Deque61B<T> {
     // We want this method to iterate recursively
     // To iterate recursively, we want the object to be able to return
 
-    public boolean contains(T x) {
-        for (T value: this) {
-            if (value == x) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     @Override
     public boolean equals(Object other) {
         if (this == other) { return true; }
