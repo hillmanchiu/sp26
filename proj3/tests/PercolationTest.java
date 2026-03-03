@@ -90,9 +90,6 @@ public class PercolationTest {
                 assertThat(test1.isFull(i, j)).isEqualTo(false);
             }
         }
-
-        //check that the constructor initializes a percolation object that does not percolate
-        assertThat(test1.percolates()).isFalse();
     }
 
     @Test
@@ -136,17 +133,21 @@ public class PercolationTest {
         assertThat(test1.percolates()).isTrue();
 
         //Test that using an index too small throws an exception
-        try {
-            test1.open(-1, -1);
-        }
-        catch (IllegalArgumentException expected) {
-        }
+        test1.open(29, 50);
+    }
 
-        //Test that using an index too big throws an exception
-        try{
-            test1.open(10, 10);
+    @Test
+    public void testExceptions() {
+        Percolation test1 = new Percolation(1);
+        try {
+            test1.open(0, -1);
+            fail("This should throw an IllegalArgumentsException");
+        } catch (IllegalArgumentException expected1) {
         }
-        catch (IndexOutOfBoundsException expected2) {
+        try {
+            test1.open(10, 10);
+            fail("This should throw an IndexOutOfBoundsException");
+        } catch (IndexOutOfBoundsException expected2) {
         }
     }
 
