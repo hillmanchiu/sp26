@@ -90,6 +90,16 @@ public class PercolationTest {
                 assertThat(test1.isFull(i, j)).isEqualTo(false);
             }
         }
+
+        //check that an exception is thrown when N <= 0
+        try {
+            Percolation test2 = new Percolation(0);
+            fail();
+        }
+        catch(IllegalArgumentException expected1) {
+            assertThat(expected1).isNotEqualTo(null);
+        }
+
     }
 
     @Test
@@ -131,23 +141,46 @@ public class PercolationTest {
         test1.open(0, 0);
         assertThat(test1.numberOfOpenSites()).isEqualTo(1);
         assertThat(test1.percolates()).isTrue();
-
-        //Test that using an index too small throws an exception
-        test1.open(29, 50);
     }
 
     @Test
     public void testExceptions() {
-        Percolation test1 = new Percolation(1);
+        Percolation test1 = new Percolation(10);
         try {
-            test1.open(0, -1);
-            fail("This should throw an IllegalArgumentsException");
-        } catch (IllegalArgumentException expected1) {
+            test1.isOpen(-1, 5);
+            fail("This should throw an IndexOutOfBoundsException");
+        } catch (IndexOutOfBoundsException expected1) {
+            assertThat(expected1).isNotEqualTo(null);
+        }
+        try {
+            test1.isOpen(10, 10);
+            fail("This should throw an IndexOutOfBoundsException");
+        } catch (IndexOutOfBoundsException expected2) {
+            assertThat(expected2).isNotEqualTo(null);
+        }
+        try {
+            test1.open(-1, 5);
+            fail("This should throw an IndexOutOfBoundsException");
+        } catch (IndexOutOfBoundsException expected3) {
+            assertThat(expected3).isNotEqualTo(null);
         }
         try {
             test1.open(10, 10);
             fail("This should throw an IndexOutOfBoundsException");
-        } catch (IndexOutOfBoundsException expected2) {
+        } catch (IndexOutOfBoundsException expected4) {
+            assertThat(expected4).isNotEqualTo(null);
+        }
+        try {
+            test1.isFull(-1, 5);
+            fail("This should throw an IndexOutOfBoundsException");
+        } catch (IndexOutOfBoundsException expected5) {
+            assertThat(expected5).isNotEqualTo(null);
+        }
+        try {
+            test1.isFull(10, 10);
+            fail("This should throw an IndexOutOfBoundsException");
+        } catch (IndexOutOfBoundsException expected6) {
+            assertThat(expected6).isNotEqualTo(null);
         }
     }
 

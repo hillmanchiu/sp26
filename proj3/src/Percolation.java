@@ -8,6 +8,9 @@ public class Percolation {
     private int squaresFilled;
 
     public Percolation(int N) {
+        if (N <= 0) {
+            throw new java.lang.IllegalArgumentException();
+        }
         waterpath = new WeightedQuickUnionUF(N * N + 2);
         waterpath2 = new WeightedQuickUnionUF(N * N + 1);
         grid = new boolean[N][N];
@@ -21,11 +24,8 @@ public class Percolation {
     }
 
     public void open(int row, int col) {
-        if (row >= gridLength || col >= gridLength) {
+        if ((row >= gridLength || col >= gridLength) || (row < 0 || col < 0)) {
             throw new java.lang.IndexOutOfBoundsException();
-        }
-        if (row < 0 || col < 0) {
-            throw new java.lang.IllegalArgumentException();
         }
         if (isOpen(row, col)) {
             return;
@@ -93,21 +93,15 @@ public class Percolation {
     }
 
     public boolean isOpen(int row, int col) {
-        if (row >= gridLength || col >= gridLength) {
+        if ((row >= gridLength || col >= gridLength) || (row < 0 || col < 0)) {
             throw new java.lang.IndexOutOfBoundsException();
-        }
-        if (row < 0 || col < 0) {
-            throw new java.lang.IllegalArgumentException();
         }
         return grid[row][col];
     }
 
     public boolean isFull(int row, int col) {
-        if (row >= gridLength || col >= gridLength) {
+        if ((row >= gridLength || col >= gridLength) || (row < 0 || col < 0)) {
             throw new java.lang.IndexOutOfBoundsException();
-        }
-        if (row < 0 || col < 0) {
-            throw new java.lang.IllegalArgumentException();
         }
         int checkIndex = xyToIndex(row, col);
         return waterpath2.connected(checkIndex, gridLength * gridLength);
