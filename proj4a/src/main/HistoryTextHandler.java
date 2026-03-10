@@ -1,11 +1,11 @@
 package main;
 
 import browser.NgordnetQuery;
-import demo.DummyHistoryTextHandler;
+import browser.NgordnetQueryHandler;
 
 import java.util.List;
 
-public class HistoryTextHandler extends DummyHistoryTextHandler {
+public class HistoryTextHandler extends NgordnetQueryHandler {
 
     NGramMap currentMap;
 
