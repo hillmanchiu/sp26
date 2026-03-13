@@ -1,0 +1,35 @@
+Test 1:
+    String length: 10
+    Number of inputs: 10^6
+    --Stack Overflow -- couldn't add 1000000 strings of length 10.
+    class BSTMap: 1.49 sec
+    Java's Built-in TreeMap: 1.47 sec
+    Java's Built-in HashMap: 0.66 sec
+Test 2:
+    String length: 10
+    Number of inputs: 10^7
+    --Stack Overflow -- couldn't add 1000000 strings of length 10.
+    class BSTMap: 23.66 sec
+    Java's Built-in TreeMap: 25.35 sec
+    Java's Built-in HashMap: 9.22 sec
+Test 3:
+    String length: 10
+    Number of inputs: 10^3
+    class ULLMap: 0.00 sec
+    class BSTMap: 0.00 sec
+    Java's Built-in TreeMap: 0.00 sec
+    Java's Built-in HashMap: 0.00 sec
+Test 4:
+    String length: 10
+    Number of inputs: 10^4
+    class ULLMap: 0.38 sec
+    class BSTMap: 0.00 sec
+    Java's Built-in TreeMap: 0.00 sec
+    Java's Built-in HashMap: 0.00 sec
+Test 5:
+    String length: 10
+    Number of inputs: 10^5
+    --Stack Overflow -- couldn't add 100000 strings of length 10.
+    class BSTMap: 0.08 sec
+    Java's Built-in TreeMap: 0.08 sec
+    Java's Built-in HashMap: 0.03 sec
