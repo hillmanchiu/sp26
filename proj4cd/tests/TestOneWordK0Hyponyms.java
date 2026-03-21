@@ -54,13 +54,10 @@ public class TestOneWordK0Hyponyms {
                 "./data/hyponyms_size82191.txt");
         List<String> words = new ArrayList<>();
         words.add("cat");
-
         NgordnetQuery nq = new NgordnetQuery(words, 0, 0, 0);
         String actual = studentHandler.handle(nq);
         String expected = "[Abyssinian, Abyssinian_cat, Acinonyx_jubatus, African_tea, Angora, Angora_cat, Arabian_tea, Bengal_tiger, Burmese_cat, Canada_lynx, Caterpillar, Egyptian_cat, European_wildcat, Felis_bengalensis, Felis_catus, Felis_chaus, Felis_concolor, Felis_domesticus, Felis_manul, Felis_ocreata, Felis_onca, Felis_pardalis, Felis_serval, Felis_silvestris, Felis_tigrina, Felis_wiedi, Felis_yagouaroundi, Lynx_canadensis, Lynx_caracal, Lynx_lynx, Lynx_pardina, Lynx_rufus, Maltese, Maltese_cat, Manx, Manx_cat, Pallas's_cat, Panthera_leo, Panthera_onca, Panthera_pardus, Panthera_tigris, Panthera_uncia, Persian_cat, Siamese, Siamese_cat, Smiledon_californicus, alley_cat, bay_lynx, big_cat, blue_point_Siamese, bobcat, bozo, caffer_cat, calico_cat, caracal, cat, cat-o'-nine-tails, catamount, catamountain, cheetah, chetah, common_lynx, cougar, desert_lynx, domestic_cat, eyra, false_saber-toothed_tiger, gib, guy, hombre, house_cat, jaguar, jaguarondi, jaguarundi, jaguarundi_cat, jungle_cat, kaffir_cat, kat, khat, king_of_beasts, kitty, kitty-cat, leopard, leopard_cat, leopardess, liger, lion, lion_cub, lioness, lionet, lynx, manul, margay, margay_cat, mountain_lion, mouser, ocelot, ounce, painter, panther, panther_cat, puma, puss, pussy, pussycat, qat, quat, queen, saber-toothed_tiger, sabertooth, sand_cat, serval, snow_leopard, sod, spotted_lynx, tabby, tabby_cat, tiger, tiger_cat, tiger_cub, tiglon, tigon, tigress, tom, tomcat, tortoiseshell, tortoiseshell-cat, true_cat, wildcat]";
-
         assertThat(actual).isEqualTo(expected);
-
 
     }
 

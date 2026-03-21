@@ -1,7 +1,6 @@
 package main;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 
 public class WordNet {
@@ -15,9 +14,9 @@ public class WordNet {
 
     public String findHyponymsGeneral(String word) {
         String[] splitword = word.split(",");
-        List<String> returnList = instanceGraph.recursiveReturnHyponyms(splitword[0]);
+        List<String> returnList = instanceGraph.iterativeHyponymsReturn(splitword[0]);
         for (int i = 1; i < splitword.length; i++) {
-            List<String> currentList = instanceGraph.recursiveReturnHyponyms(splitword[i]);
+            List<String> currentList = instanceGraph.iterativeHyponymsReturn(splitword[i]);
             int j = 0;
             while (j < returnList.size()) {
                 if (!currentList.contains(returnList.get(j))) {

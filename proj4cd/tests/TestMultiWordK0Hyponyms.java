@@ -72,4 +72,17 @@ public class TestMultiWordK0Hyponyms {
         assertThat(actual2).isEqualTo(expected2);
     }
 
+    @Test
+    public void testTransition() {
+        NgordnetQueryHandler studentHandler = AutograderBuddy.getHyponymsHandler(
+                WORD_HISTORY_SIZE3_FILE, YEAR_HISTORY_FILE, "./data/synsets_size82191.txt",
+                "./data/hyponyms_size82191.txt");
+        List<String> words = new ArrayList<>();
+        String expected1 = "[changeover, conversion, cut, dissolve, flash-forward, flashback, fossilisation, fossilization, glycogenesis, ground_swell, isomerisation, isomerization, jump, jump_cut, leap, modulation, passage, quantum_jump, rectification, saltation, segue, transition]";
+        words.add("transition");
+        NgordnetQuery nq1 = new NgordnetQuery(words, 0, 0, 0);
+        String actual1 = studentHandler.handle(nq1);
+        assertThat(actual1).isEqualTo(expected1);
+    }
+
 }

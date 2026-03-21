@@ -87,4 +87,39 @@ public class Graph {
         }
         return false;
     }
+
+    public List<String> iterativeHyponymsReturn(String word) {
+        List<String> returnSynsets = new ArrayList<>();
+        List<String> currentHyponyms = new ArrayList<>();
+        List<String> nextSynsets;
+        for (Map.Entry<String, String> currentSynset : numberWords.entrySet()) {
+            if (checkSynset(currentSynset.getValue(), word)) {
+                returnSynsets.add(currentSynset.getKey());
+                currentHyponyms = new ArrayList<>();
+                if (numberHyponyms.containsKey(currentSynset.getKey())) {
+                    currentHyponyms.addAll(numberHyponyms.get(currentSynset.getKey()));
+                    while (!currentHyponyms.isEmpty()) {
+                        nextSynsets = new ArrayList<>();
+                        for (String currentHyponym : currentHyponyms) {
+                            if (numberHyponyms.containsKey(currentHyponym)) {
+                                nextSynsets.addAll(numberHyponyms.get(currentHyponym));
+                            }
+                        }
+                        returnSynsets.addAll(currentHyponyms);
+                        currentHyponyms = new ArrayList<>();
+                        currentHyponyms.addAll(nextSynsets);
+                    }
+                }
+            }
+        }
+        for (String numberSynset : returnSynsets) {
+            for (String insertWord : (numberWords.get(numberSynset)).split(" ")) {
+                if (!currentHyponyms.contains(insertWord)) {
+                    currentHyponyms.add(insertWord);
+                }
+            }
+        }
+        return currentHyponyms;
+    }
+
 }
