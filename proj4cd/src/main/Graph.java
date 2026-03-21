@@ -44,7 +44,7 @@ public class Graph {
         numberHyponyms = hyponymList;
     }
 
-    public List<String> RecursiveReturnHyponyms(String word) {
+    public List<String> recursiveReturnHyponyms(String word) {
         listToReturn = new ArrayList<>();
         //Check every synset in the database
         for (Map.Entry<String, String> currentSyn : numberWords.entrySet()) {
