@@ -9,7 +9,8 @@ import java.util.Map;
 public class Graph {
 
     //A Hashmap containing each synset and the hyponyms associated with that synset.
-    private HashMap<String, List<String>> synSets = new HashMap<>();
+    private HashMap<String, String> numberWords;
+    private HashMap<String, List<String>> numberHyponyms;
     private List<String> listToReturn;
 
     public Graph(String synsetsFilename, String hyponymFilename) {
@@ -22,6 +23,7 @@ public class Graph {
             String[] splitLine = nextLine.split(",");
             numberWord.put(splitLine[0], splitLine[1]);
         }
+        numberWords = numberWord;
         //Create a hashmap associating each number and its hyponym numbers
         HashMap<String, List<String>> hyponymList = new HashMap<>();
         In in2 = new In(hyponymFilename);
@@ -29,39 +31,25 @@ public class Graph {
             String thisLine = in2.readLine();
             String[] currentLine = thisLine.split(",");
             List<String> currentList = new ArrayList<>();
-            if (!hyponymList.containsKey(currentLine[0])) {
-                for (int i = 1; i < currentLine.length; i++) {
-                    currentList.add(currentLine[i]);
-                }
-                hyponymList.put(currentLine[0], currentList);
-            } else {
-                for (int i = 1; i < currentLine.length; i++) {
-                    (hyponymList.get(currentLine[0])).add(currentLine[i]);
+            for (int i = 1; i < currentLine.length; i++) {
+                currentList.add(currentLine[i]);
+            }
+            if (hyponymList.containsKey(currentLine[0])) {
+                for (String insert : (hyponymList.get(currentLine[0]))) {
+                    currentList.add(insert);
                 }
             }
+            hyponymList.put(currentLine[0], currentList);
         }
-        //Translate hyponymList into Strings rather than numbers
-        for (Map.Entry<String, String> currentMap : numberWord.entrySet()) {
-            List<String> insertList = new ArrayList<>();
-            String getKey = currentMap.getKey();
-            if (hyponymList.containsKey(getKey)) {
-                for (String insertString : hyponymList.get(getKey)) {
-                    insertList.add(numberWord.get(insertString));
-                }
-                synSets.put(currentMap.getValue(), insertList);
-            } else {
-                synSets.put(currentMap.getValue(), null);
-            }
-        }
-        //At this point you should have associated every synset to its hyponym synsets.
+        numberHyponyms = hyponymList;
     }
 
-    public List<String> returnHyponyms(String word) {
+    public List<String> RecursiveReturnHyponyms(String word) {
         listToReturn = new ArrayList<>();
         //Check every synset in the database
-        for (Map.Entry<String, List<String>> currentSyn : synSets.entrySet()) {
+        for (Map.Entry<String, String> currentSyn : numberWords.entrySet()) {
             //Check every word in the synset
-            if (checkSynset(currentSyn.getKey(), word)) {
+            if (checkSynset(currentSyn.getValue(), word)) {
                 //if the word is in the synset, add its words to the returnList.
                 recursiveHelper(currentSyn.getKey());
             }
@@ -71,15 +59,17 @@ public class Graph {
 
     private void recursiveHelper(String synset) {
         //synset is the synset we are currently iterating over
-        String[] synsetWords = synset.split(" ");
+        String[] synsetWords = numberWords.get(synset).split(" ");
         for (String wordinSynset : synsetWords) {
             if (!listToReturn.contains(wordinSynset)) {
                 listToReturn.add(wordinSynset);
             }
         }
         // Iterate over every hyponym of the synset:
-        if (synSets.get(synset) != null) {
-            for (String currentSynset : synSets.get(synset)) {
+        if (!numberHyponyms.containsKey(synset)) {
+            return;
+        } else {
+            for (String currentSynset : numberHyponyms.get(synset)) {
                 recursiveHelper(currentSynset);
             }
         }
@@ -87,6 +77,9 @@ public class Graph {
 
     private boolean checkSynset(String synset, String word) {
         //splits a synset into a list of strings
+        if (synset.equals(word)) {
+            return true;
+        }
         for (String wordin: synset.split(" ")) {
             if (wordin.equals(word)) {
                 return true;
@@ -94,57 +87,4 @@ public class Graph {
         }
         return false;
     }
-
-    public List<String> iterativeHyponymsReturn(String word) {
-        List<String> returnSynsets = new ArrayList<>();
-        List<String> currentHyponyms = new ArrayList<>();
-        List<String> nextSynsets;
-        for (Map.Entry<String, List<String>> currentSynset : synSets.entrySet()) {
-            if (checkSynset(currentSynset.getKey(), word)) {
-                returnSynsets.add(currentSynset.getKey());
-                if (synSets.get(currentSynset.getKey()) != null) {
-                    for (String insertSynset : currentSynset.getValue()) {
-                        if (!returnSynsets.contains(insertSynset)) {
-                            currentHyponyms.add(insertSynset);
-                        }
-                    }
-                }
-                while (!currentHyponyms.isEmpty()) {
-                    nextSynsets = new ArrayList<>();
-                    for (String currentHyponym : currentHyponyms) {
-                        if (synSets.get(currentHyponym) != null) {
-                            for (String insertSynset2 : synSets.get(currentHyponym)) {
-                                nextSynsets.add(insertSynset2);
-                            }
-                        }
-                    }
-                    for (String insertHyponym : currentHyponyms) {
-                        if (!returnSynsets.contains(insertHyponym)) {
-                            returnSynsets.add(insertHyponym);
-                        }
-                    }
-                    currentHyponyms = new ArrayList<>();
-                    for (String insertHyponym2 : nextSynsets) {
-                        if (!returnSynsets.contains(insertHyponym2)) {
-                            currentHyponyms.add(insertHyponym2);
-                        }
-                    }
-                }
-            }
-        }
-        return synsetSeparator(returnSynsets);
-    }
-
-    public List<String> synsetSeparator(List<String> inputList) {
-        List<String> returnList = new ArrayList<>();
-        for (String synset : inputList) {
-            for (String word : synset.split(" ")) {
-                if (!returnList.contains(word)) {
-                    returnList.add(word);
-                }
-            }
-        }
-        return returnList;
-    }
-
 }

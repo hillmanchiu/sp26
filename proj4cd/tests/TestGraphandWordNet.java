@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -18,7 +19,7 @@ public class TestGraphandWordNet {
         //test that the WordNet constructor makes something and it is equivalent to the graph constructor
         WordNet testWordNet = new WordNet(
                 TestOneWordK0Hyponyms.SYNSET_SIZE16_FILE, TestOneWordK0Hyponyms.HYPONYM_SIZE16_FILE);
-        List<String> testGraphList = testGraph.iterativeHyponymsReturn("event");
+        List<String> testGraphList = testGraph.RecursiveReturnHyponyms("event");
         //List<String> testWordNetList = testWordNet.instanceGraph.returnHyponyms("event");
         //assertThat(testGraphList).isEqualTo(testWordNetList);
     }

@@ -70,8 +70,6 @@ public class TestMultiWordK0Hyponyms {
         NgordnetQuery nq2 = new NgordnetQuery(word, 0, 0, 0);
         String actual2 = studentHandler.handle(nq2);
         assertThat(actual2).isEqualTo(expected2);
-
-
     }
 
 }
