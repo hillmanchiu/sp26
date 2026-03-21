@@ -87,13 +87,64 @@ public class Graph {
 
     private boolean checkSynset(String synset, String word) {
         //splits a synset into a list of strings
-        String[] synsetWords = synset.split(" ");
-        for (String wordin: synsetWords) {
+        for (String wordin: synset.split(" ")) {
             if (wordin.equals(word)) {
                 return true;
             }
         }
         return false;
+    }
+
+    public List<String> iterativeHyponymsReturn(String word) {
+        List<String> returnSynsets = new ArrayList<>();
+        List<String> currentHyponyms = new ArrayList<>();
+        List<String> nextSynsets;
+        for (Map.Entry<String, List<String>> currentSynset : synSets.entrySet()) {
+            if (checkSynset(currentSynset.getKey(), word)) {
+                returnSynsets.add(currentSynset.getKey());
+                if (synSets.get(currentSynset.getKey()) != null) {
+                    for (String insertSynset : currentSynset.getValue()) {
+                        if (!returnSynsets.contains(insertSynset)) {
+                            currentHyponyms.add(insertSynset);
+                        }
+                    }
+                }
+                while (!currentHyponyms.isEmpty()) {
+                    nextSynsets = new ArrayList<>();
+                    for (String currentHyponym : currentHyponyms) {
+                        if (synSets.get(currentHyponym) != null) {
+                            for (String insertSynset2 : synSets.get(currentHyponym)) {
+                                nextSynsets.add(insertSynset2);
+                            }
+                        }
+                    }
+                    for (String insertHyponym : currentHyponyms) {
+                        if (!returnSynsets.contains(insertHyponym)) {
+                            returnSynsets.add(insertHyponym);
+                        }
+                    }
+                    currentHyponyms = new ArrayList<>();
+                    for (String insertHyponym2 : nextSynsets) {
+                        if (!returnSynsets.contains(insertHyponym2)) {
+                            currentHyponyms.add(insertHyponym2);
+                        }
+                    }
+                }
+            }
+        }
+        return synsetSeparator(returnSynsets);
+    }
+
+    public List<String> synsetSeparator(List<String> inputList) {
+        List<String> returnList = new ArrayList<>();
+        for (String synset : inputList) {
+            for (String word : synset.split(" ")) {
+                if (!returnList.contains(word)) {
+                    returnList.add(word);
+                }
+            }
+        }
+        return returnList;
     }
 
 }

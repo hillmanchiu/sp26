@@ -14,9 +14,9 @@ public class WordNet {
 
     public String findHyponymsGeneral(String word) {
         String[] splitword = word.split(",");
-        List<String> returnList = instanceGraph.returnHyponyms(splitword[0]);
+        List<String> returnList = instanceGraph.iterativeHyponymsReturn(splitword[0]);
         for (int i = 1; i < splitword.length; i++) {
-            List<String> currentList = instanceGraph.returnHyponyms(splitword[i]);
+            List<String> currentList = instanceGraph.iterativeHyponymsReturn(splitword[i]);
             int j = 0;
             while (j < returnList.size()) {
                 if (!currentList.contains(returnList.get(j))) {
