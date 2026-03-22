@@ -6,14 +6,16 @@ import java.util.List;
 
 public class HyponymsHandler extends NgordnetQueryHandler {
 
-    WordNet currentMap;
+    WordNet currentNet;
 
-    public HyponymsHandler(WordNet thisMap) {
-        currentMap = thisMap;
+    public HyponymsHandler(WordNet thisNet) {
+        currentNet = thisNet;
+
     }
 
     public HyponymsHandler() {
-        currentMap = new WordNet("./data/synsets_size82191.txt", "./data/hyponyms_size82191.txt");
+        currentNet = new WordNet("./data/synsets_size82191.txt", "./data/hyponyms_size82191.txt",
+                "./data/word_history_size14377.csv", "./data/year_history.csv");
     }
 
     @Override
@@ -25,6 +27,6 @@ public class HyponymsHandler extends NgordnetQueryHandler {
             returnString = returnString + listWords.get(i) + ",";
         }
         returnString = returnString + listWords.getLast();
-        return currentMap.findHyponymsGeneral(returnString);
+        return currentNet.findHyponymsGeneral(returnString);
     }
 }

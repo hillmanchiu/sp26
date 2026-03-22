@@ -8,6 +8,7 @@ public class Graph {
     //A Hashmap containing each synset and the hyponyms associated with that synset.
     private HashMap<String, String> numberWords = new HashMap<>();
     private HashMap<String, List<String>> numberHyponyms = new HashMap<>();
+    private HashMap<String, List<String>> wordSynsets = new HashMap<>();
 
     public Graph(String synsetsFilename, String hyponymFilename) {
         In in = new In(synsetsFilename);
@@ -15,6 +16,15 @@ public class Graph {
             String nextLine = in.readLine();
             String[] splitLine = nextLine.split(",");
             numberWords.put(splitLine[0], splitLine[1]);
+            for (String indivWord : splitLine[1].split(" ")) {
+                if (!wordSynsets.containsKey(indivWord)) {
+                    List<String> synsetList = new ArrayList<>();
+                    synsetList.add(splitLine[0]);
+                    wordSynsets.put(indivWord, synsetList);
+                } else {
+                    wordSynsets.get(indivWord).add(splitLine[0]);
+                }
+            }
         }
         In in2 = new In(hyponymFilename);
         while (!in2.isEmpty()) {
@@ -43,21 +53,19 @@ public class Graph {
         List<String> returnSynsets = new ArrayList<>();
         List<String> currentHyponyms = new ArrayList<>();
         List<String> nextSynsets = new ArrayList<>();
-        for (Map.Entry<String, String> currentSynset : numberWords.entrySet()) {
-            if (checkSynset(currentSynset.getValue(), word)) {
-                returnSynsets.add(currentSynset.getKey());
-                if (numberHyponyms.containsKey(currentSynset.getKey())) {
-                    currentHyponyms.addAll(numberHyponyms.get(currentSynset.getKey()));
-                    while (!currentHyponyms.isEmpty()) {
-                        nextSynsets.clear();
-                        for (String currentHyponym : currentHyponyms) {
-                            if (numberHyponyms.containsKey(currentHyponym)) {
-                                nextSynsets.addAll(numberHyponyms.get(currentHyponym));
-                            }
+        for (String currentSynset : wordSynsets.get(word)) {
+            returnSynsets.add(currentSynset);
+            if (numberHyponyms.containsKey(currentSynset)) {
+                currentHyponyms.addAll(numberHyponyms.get(currentSynset));
+                while (!currentHyponyms.isEmpty()) {
+                    nextSynsets.clear();
+                    for (String currentHyponym : currentHyponyms) {
+                        if (numberHyponyms.containsKey(currentHyponym)) {
+                            nextSynsets.addAll(numberHyponyms.get(currentHyponym));
                         }
-                        returnSynsets.addAll(currentHyponyms);
-                        currentHyponyms = new ArrayList<>(nextSynsets);
                     }
+                    returnSynsets.addAll(currentHyponyms);
+                    currentHyponyms = new ArrayList<>(nextSynsets);
                 }
             }
         }
