@@ -48,8 +48,6 @@ public class TestMultiWordK0Hyponyms {
         assertThat(actual).isEqualTo(expected);
     }
 
-    // TODO: Add more unit tests (including edge case tests) here.
-
     @Test
     public void testMultipleWords() {
         NgordnetQueryHandler studentHandler = AutograderBuddy.getHyponymsHandler(
