@@ -14,8 +14,7 @@ public class HyponymsHandler extends NgordnetQueryHandler {
     }
 
     public HyponymsHandler() {
-        currentNet = new WordNet("./data/synsets_size82191.txt", "./data/hyponyms_size82191.txt",
-                "./data/word_history_size14377.csv", "./data/year_history.csv");
+        currentNet = new WordNet("./data/synsets_size82191.txt", "./data/hyponyms_size82191.txt");
     }
 
     @Override

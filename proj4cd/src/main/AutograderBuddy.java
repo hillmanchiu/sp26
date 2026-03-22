@@ -9,6 +9,6 @@ public class AutograderBuddy {
             String wordHistoryFile, String yearHistoryFile,
             String synsetFile, String hyponymFile) {
 
-        return new HyponymsHandler(new WordNet(synsetFile, hyponymFile, wordHistoryFile, yearHistoryFile));
+        return new HyponymsHandler(new WordNet(synsetFile, hyponymFile));
     }
 }

@@ -38,17 +38,6 @@ public class Graph {
         }
     }
 
-
-    private boolean checkSynset(String synset, String word) {
-        //splits a synset into a list of strings
-        for (String wordin: synset.split(" ")) {
-            if (wordin.equals(word)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     public List<String> iterativeHyponymsReturn(String word) {
         List<String> returnSynsets = new ArrayList<>();
         List<String> currentHyponyms = new ArrayList<>();
