@@ -12,8 +12,8 @@ public class TestGraphandWordNet {
     @Test
     public void testConstructors() {
         //test that the graph constructor makes something
-        Graph testGraph = new Graph(TestOneWordK0Hyponyms.SYNSET_SIZE16_FILE,
-                TestOneWordK0Hyponyms.HYPONYM_SIZE16_FILE);
+        Graph testGraph = new Graph(TestOneWordK0Hyponyms.SYNSET_SIZE1000_FILE,
+                TestOneWordK0Hyponyms.HYPONYM_SIZE1000_FILE);
         assertThat(testGraph).isNotEqualTo(null);
 
         //test that the WordNet constructor makes something and it is equivalent to the graph constructor
