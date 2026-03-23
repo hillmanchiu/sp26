@@ -42,6 +42,9 @@ public class Graph {
         List<String> returnSynsets = new ArrayList<>();
         List<String> currentHyponyms = new ArrayList<>();
         List<String> nextSynsets = new ArrayList<>();
+        if (!wordSynsets.containsKey(word)) {
+            return new ArrayList<>();
+        }
         for (String currentSynset : wordSynsets.get(word)) {
             returnSynsets.add(currentSynset);
             if (numberHyponyms.containsKey(currentSynset)) {
